@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Plant Disease Prediction Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .buttons button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .buttons button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .files {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .files ul {
+            list-style: none;
+            padding: 0;
+        }
+        .files ul li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .files ul li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .files ul li a:hover {
+            text-decoration: underline;
+        }
+        .tasks {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .tasks ul {
+            list-style: none;
+            padding: 0;
+        }
+        .tasks ul li {
+            background: #e6f7e6;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .tasks ul li span {
+            font-size: 14px;
+            color: #666;
+        }
+        .search-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        function showFiles(category) {
+            const categories = document.querySelectorAll('.files, .tasks');
+            categories.forEach(cat => {
+                cat.style.display = cat.id === `${category}-files` || cat.id === `${category}-tasks` ? 'block' : 'none';
+            });
+        }
+
+        function filterFiles(event) {
+            const query = event.target.value.toLowerCase();
+            const lists = document.querySelectorAll('.files ul li, .tasks ul li');
+            lists.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Plant Disease Prediction Dashboard</h1>
+    </header>
+    <main>
+        <div class="search-box">
+            <input type="text" placeholder="Search files or tasks..." onkeyup="filterFiles(event)">
+        </div>
+        <div class="buttons">
+            <button onclick="showFiles('ppts')"><i class="fas fa-file-powerpoint"></i> Presentations</button>
+            <button onclick="showFiles('reports')"><i class="fas fa-file-alt"></i> Reports</button>
+            <button onclick="showFiles('colab')"><i class="fas fa-code"></i> Colab Files</button>
+            <button onclick="showFiles('datasets')"><i class="fas fa-database"></i> Datasets</button>
+            <button onclick="showFiles('tasks')"><i class="fas fa-tasks"></i> Tasks</button>
+        </div>
+        <section id="ppts-files" class="files">
+            <h3>Presentations</h3>
+            <ul>
+                <li><a href="https://becbapatla-my.sharepoint.com/:p:/r/personal/y21acs404_becbapatla_ac_in/_layouts/15/Doc.aspx?sourcedoc=%7B2B0A77F5-2096-4C8B-AB68-30E094C55C51%7D&file=data_set_description.pptx&action=edit&mobileredirect=true" target="_blank">Intro to Plant Diseases.pptx</a></li>
+                <li><a href="https://becbapatla-my.sharepoint.com/:p:/r/personal/y21acs404_becbapatla_ac_in/_layouts/15/Doc.aspx?sourcedoc=%7B2B0A77F5-2096-4C8B-AB68-30E094C55C51%7D&file=data_set_description.pptx&action=edit&mobileredirect=true" target="_blank">Final Presentation.pptx</a></li>
+            </ul>
+        </section>
+        <section id="reports-files" class="files">
+            <h3>Reports</h3>
+            <ul>
+                <li><a href="#" target="_blank">Project Report.docx</a></li>
+                <li><a href="#" target="_blank">Research Summary.pdf</a></li>
+            </ul>
+        </section>
+        <section id="colab-files" class="files">
+            <h3>Colab Files</h3>
+            <ul>
+                <li><a href="#" target="_blank">Disease Detection.ipynb</a></li>
+                <li><a href="#" target="_blank">Fertilizer Recommendation.ipynb</a></li>
+            </ul>
+        </section>
+        <section id="datasets-files" class="files">
+            <h3>Datasets</h3>
+            <ul>
+                <li><a href="#" target="_blank">Plant_Disease_Dataset.csv</a></li>
+                <li><a href="#" target="_blank">Fertilizer_Dataset.xlsx</a></li>
+            </ul>
+        </section>
+        <section id="tasks-tasks" class="tasks">
+            <h3>Project Tasks</h3>
+            <ul>
+                <li>Prepare Project Proposal <span>(Deadline: 22-Dec-2024)</span></li>
+                <li>Gather and Clean Datasets <span>(Deadline: 25-Dec-2024)</span></li>
+                <li>Train and Test Models <span>(Deadline: 31-Dec-2024)</span></li>
+                <li>Compile Final Report <span>(Deadline: 05-Jan-2025)</span></li>
+                <li>Present Final Results <span>(Deadline: 10-Jan-2025)</span></li>
+            </ul>
+        </section>
+        <section id="attendance-link" class="files">
+            <h3>Attendance</h3>
+            <ul>
+                <li><a href="https://forms.office.com/pages/responsepage.aspx?id=pDcHlUcpzkacU0co8B_VmBKjrn5LxzZFjTOV1tOny3pUN0pVWFc3WVNSNElNV01BN1A5TFFJVVdCNy4u&route=shorturl" target="_blank">Attendance Form</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Plant Disease Prediction Project</p>
+    </footer>
+</body>
+</html>
